@@ -1,4 +1,5 @@
 const tasks = JSON.parse(localStorage.getItem("tasks")) || []
+
 const createTask = (titleFiled , descriptionFiled) => {
     const taskObj = {
         title : titleFiled.value,
@@ -21,4 +22,8 @@ const appendToArry = (obj , array ) => {
 
 const addToLocalStorage = (array , key) => {
     window.localStorage.setItem(key , JSON.stringify(array))
+}
+
+const renderTasks = (tasks , card) => {
+
 }

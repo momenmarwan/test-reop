@@ -1,4 +1,5 @@
 const container = document.querySelector(".container")
+console.log(container)
 
 const createHtmlElement = (ele , className , id , textContent) => {
     const el = document.createElement(ele)
@@ -14,8 +15,8 @@ const createHtmlElement = (ele , className , id , textContent) => {
     return el
 }
 
-const createBtn = (textContent ,className, value , type , event , cb) => {
-    const btn = createHtmlElement("button",null,null,textContent , className)
+const createBtn = (textContent , value , type , event , cb) => {
+    const btn = createHtmlElement("button",null,null,textContent)
     btn.value = value ;
     btn.type = type ;
     btn.addEventListener(event , cb)
@@ -37,28 +38,27 @@ const appendChildrn = (parent , ...childrn) => {
         parent.appendChild(child)
     })
 }
-const createList = () => {
-    const li = createHtmlElement("li" , null , null , "Task")
+const createList = (taskTitle , taskDescription) => {
+    const li = createHtmlElement("li" , null , null)
+    let title = createHtmlElement("p")
+    title.textContent = taskTitle
+    let description = createHtmlElement("p")
+    description.textContent = taskDescription
     const checkBtn = createBtn("")
     const deleteBtn = createBtn("")
     const checkIcon = createHtmlElement("i" , "fa fa-check")
     checkBtn.appendChild(checkIcon)
     const trashIcon = createHtmlElement("i" , "fa fa-trash")
     deleteBtn.appendChild(trashIcon)
-    appendChildrn(li , deleteBtn , checkBtn)
+    appendChildrn(li , deleteBtn , checkBtn , title , description)
     return li
 
 }
 
 
 const addTask = createHtmlElement("div" , "add-task")
-const title = createInput("text" ,"title" ,null,"Title" , null)
-const description = createInput("text" ,"description" ,null,"description" , null)
-
-const addBtn = createBtn("Add" , "btn-add",null,null , "click" , () => {
-    appendToArry(createTask(title , description) , tasks)
-    addToLocalStorage(tasks , "tasks")    
-})
+const input = createInput("text" ,null ,null,"Add a Task" , null)
+const addBtn = createBtn("Add")
 
 const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")
 const notCompleted =  createHtmlElement("h3",null,null,"Not Completed")
@@ -75,7 +75,7 @@ appendChildrn(completedOrderedList , completed ,completedList)
 
 
 
-appendChildrn(addTask,title ,description,addBtn)
+appendChildrn(addTask,input,addBtn)
 appendChildrn(container , addTask , notCompletedOrderedList , completedOrderedList)
 
 
