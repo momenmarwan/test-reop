@@ -51,16 +51,6 @@ const createList = () => {
 
 }
 
-/* 
-        <ol class="not-completed">
-            <h3>Not Completed</h3>
-            <li> Task
-                <button><i class="fa fa-check"></i></button>
-                <button><i class="fa fa-trash"></i></button>
-            </li>
-        </ol>
-
-*/
 
 const addTask = createHtmlElement("div" , "add-task")
 const input = createInput("text" ,null ,null,"Add a Task" , null)
@@ -82,7 +72,7 @@ appendChildrn(completedOrderedList , completed ,completedList)
 
 
 appendChildrn(addTask,input,addBtn)
-appendChildrn(container , addTask , notCompletedOrderedList)
+appendChildrn(container , addTask , notCompletedOrderedList , completedOrderedList)
 
 
 
