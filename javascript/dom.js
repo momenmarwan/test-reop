@@ -57,8 +57,7 @@ const description = createInput("text" ,"description" ,null,"description" , null
 
 const addBtn = createBtn("Add" , "btn-add",null,null , "click" , () => {
     appendToArry(createTask(title , description) , tasks)
-    addToLocalStorage(tasks , "tasks")
-    
+    addToLocalStorage(tasks , "tasks")    
 })
 
 const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")

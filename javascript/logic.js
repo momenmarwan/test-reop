@@ -1,4 +1,4 @@
-const tasks = []
+const tasks = JSON.parse(localStorage.getItem("tasks")) || []
 const createTask = (titleFiled , descriptionFiled) => {
     const taskObj = {
         title : titleFiled.value,
