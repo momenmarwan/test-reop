@@ -1,5 +1,4 @@
 const container = document.querySelector(".container")
-console.log(container)
 
 const createHtmlElement = (ele , className , id , textContent) => {
     const el = document.createElement(ele)
@@ -15,8 +14,8 @@ const createHtmlElement = (ele , className , id , textContent) => {
     return el
 }
 
-const createBtn = (textContent , value , type , event , cb) => {
-    const btn = createHtmlElement("button",null,null,textContent)
+const createBtn = (textContent ,className, value , type , event , cb) => {
+    const btn = createHtmlElement("button",null,null,textContent , className)
     btn.value = value ;
     btn.type = type ;
     btn.addEventListener(event , cb)
@@ -53,8 +52,13 @@ const createList = () => {
 
 
 const addTask = createHtmlElement("div" , "add-task")
-const input = createInput("text" ,null ,null,"Add a Task" , null)
-const addBtn = createBtn("Add")
+const title = createInput("text" ,"title" ,null,"Title" , null)
+const description = createInput("text" ,"description" ,null,"description" , null)
+
+const addBtn = createBtn("Add" , "btn-add",null,null , "click" , () => {
+    appendToArry(createTask(title , description) , tasks)
+    addToLocalStorage(tasks , "tasks")    
+})
 
 const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")
 const notCompleted =  createHtmlElement("h3",null,null,"Not Completed")
@@ -71,7 +75,7 @@ appendChildrn(completedOrderedList , completed ,completedList)
 
 
 
-appendChildrn(addTask,input,addBtn)
+appendChildrn(addTask,title ,description,addBtn)
 appendChildrn(container , addTask , notCompletedOrderedList , completedOrderedList)
 
 
