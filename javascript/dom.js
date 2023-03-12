@@ -44,10 +44,14 @@ const createList = (taskTitle , taskDescription , index) => {
     title.textContent = taskTitle
     let description = createHtmlElement("p")
     description.textContent = taskDescription
-    const checkBtn = createBtn("" )
+    const checkBtn = createBtn("" ,index )
     const deleteBtn = createBtn("" , index)
     deleteBtn.addEventListener("click" , () => {
         deleteTask(parseInt(deleteBtn.value))
+        addToLocalStorage(tasks , "tasks")
+    })
+    checkBtn.addEventListener("click" , () => {
+        markDoList(checkBtn.value)
         addToLocalStorage(tasks , "tasks")
     })
     const checkIcon = createHtmlElement("i" , "fa fa-check")
