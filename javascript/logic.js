@@ -30,7 +30,13 @@ const addToLocalStorage = (array , key) => {
 const renderTasks = (tasks) => {
     tasks.forEach((task , index) => {
         let taskList = createList(task.title , task.description , index)
-        notCompletedOrderedList.appendChild(taskList)
+        if(task.mark){
+            completedOrderedList.appendChild(taskList)
+
+        }else{
+            notCompletedOrderedList.appendChild(taskList)
+
+        }
     })
 
 }
@@ -38,6 +44,12 @@ const renderTasks = (tasks) => {
 const deleteTask = (index) => {
     tasks.splice(index , 1)
     console.log(tasks)
+
+}
+
+const markDoList = (index) => {
+    tasks[index].mark = true
+    console.log(tasks[index])
 
 }
 renderTasks(tasks)
