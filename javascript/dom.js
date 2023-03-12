@@ -49,7 +49,6 @@ const createList = (taskTitle , taskDescription , index) => {
     deleteBtn.addEventListener("click" , () => {
         deleteTask(parseInt(deleteBtn.value))
         addToLocalStorage(tasks , "tasks")
-        renderTasks(tasks)
     })
     const checkIcon = createHtmlElement("i" , "fa fa-check")
     checkBtn.appendChild(checkIcon)
@@ -63,7 +62,7 @@ const createList = (taskTitle , taskDescription , index) => {
 
 const addTask = createHtmlElement("div" , "add-task")
 const title = createInput("text" ,null ,null,"Add a Task" , null)
-const description = createInput("text" , null , null , "Add a Task" , null)
+const description = createInput("text" , null , null , "Add a description" , null)
 
 const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")
 const notCompleted =  createHtmlElement("h3",null,null,"Not Completed")
