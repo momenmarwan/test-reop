@@ -1,5 +1,5 @@
 const container = document.querySelector(".container")
-console.log(container)
+
 
 const createHtmlElement = (ele , className , id , textContent) => {
     const el = document.createElement(ele)
@@ -38,14 +38,19 @@ const appendChildrn = (parent , ...childrn) => {
         parent.appendChild(child)
     })
 }
-const createList = (taskTitle , taskDescription) => {
+const createList = (taskTitle , taskDescription , index) => {
     const li = createHtmlElement("li" , null , null)
     let title = createHtmlElement("p")
     title.textContent = taskTitle
     let description = createHtmlElement("p")
     description.textContent = taskDescription
-    const checkBtn = createBtn("")
-    const deleteBtn = createBtn("")
+    const checkBtn = createBtn("" )
+    const deleteBtn = createBtn("" , index)
+    deleteBtn.addEventListener("click" , () => {
+        deleteTask(parseInt(deleteBtn.value))
+        addToLocalStorage(tasks , "tasks")
+        renderTasks(tasks)
+    })
     const checkIcon = createHtmlElement("i" , "fa fa-check")
     checkBtn.appendChild(checkIcon)
     const trashIcon = createHtmlElement("i" , "fa fa-trash")
@@ -57,12 +62,19 @@ const createList = (taskTitle , taskDescription) => {
 
 
 const addTask = createHtmlElement("div" , "add-task")
-const input = createInput("text" ,null ,null,"Add a Task" , null)
-const addBtn = createBtn("Add")
+const title = createInput("text" ,null ,null,"Add a Task" , null)
+const description = createInput("text" , null , null , "Add a Task" , null)
 
 const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")
 const notCompleted =  createHtmlElement("h3",null,null,"Not Completed")
-const notcompletedList = createList()
+
+const addBtn = createBtn("Add")
+addBtn.addEventListener("click" , () => {
+    appendToArry(createTask(title,description),tasks)
+    addToLocalStorage(tasks , "tasks")
+})
+
+
 
 const completedOrderedList = createHtmlElement("ol" , "completed")
 const completed =  createHtmlElement("h3",null,null,"Completed")
@@ -70,13 +82,15 @@ const completedList = createList()
 
 
 
-appendChildrn(notCompletedOrderedList , notCompleted ,notcompletedList)
+appendChildrn(notCompletedOrderedList , notCompleted )
 appendChildrn(completedOrderedList , completed ,completedList)
 
 
 
-appendChildrn(addTask,input,addBtn)
+appendChildrn(addTask,title,description,addBtn)
 appendChildrn(container , addTask , notCompletedOrderedList , completedOrderedList)
+
+
 
 
 

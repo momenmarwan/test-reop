@@ -1,10 +1,13 @@
 const tasks = JSON.parse(localStorage.getItem("tasks")) || []
 
+
+
+
 const createTask = (titleFiled , descriptionFiled) => {
     const taskObj = {
         title : titleFiled.value,
         description : descriptionFiled.value,
-        time : Date.now() ,
+        id : Date.now() ,
         mark : false
     }
     cleanInputs(titleFiled ,descriptionFiled)
@@ -24,6 +27,17 @@ const addToLocalStorage = (array , key) => {
     window.localStorage.setItem(key , JSON.stringify(array))
 }
 
-const renderTasks = (tasks , card) => {
+const renderTasks = (tasks) => {
+    tasks.forEach((task , index) => {
+        let taskList = createList(task.title , task.description , index)
+        notCompletedOrderedList.appendChild(taskList)
+    })
 
 }
+
+const deleteTask = (index) => {
+    tasks.splice(index , 1)
+    console.log(tasks)
+
+}
+renderTasks(tasks)
