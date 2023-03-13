@@ -32,10 +32,8 @@ const renderTasks = (tasks) => {
         let taskList = createList(task.title , task.description , index)
         if(task.mark){
             completedOrderedList.appendChild(taskList)
-
         }else{
             notCompletedOrderedList.appendChild(taskList)
-
         }
     })
 
@@ -50,6 +48,14 @@ const deleteTask = (index) => {
 const markDoList = (index) => {
     tasks[index].mark = true
     console.log(tasks[index])
+
+}
+
+const updateTask = (index , taskFiled , descriptionFiled) => {
+    // taskFiled.value = tasks[index].title
+    // descriptionFiled.value = tasks[index].description
+    console.log(taskFiled.value)
+    console.log(descriptionFiled.value)
 
 }
 renderTasks(tasks)
