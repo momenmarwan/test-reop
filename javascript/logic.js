@@ -7,7 +7,6 @@ const createTask = (titleFiled , descriptionFiled) => {
     const taskObj = {
         title : titleFiled.value,
         description : descriptionFiled.value,
-        id : Date.now() ,
         mark : false
     }
     cleanInputs(titleFiled ,descriptionFiled)
@@ -28,6 +27,13 @@ const addToLocalStorage = (array , key) => {
 }
 
 const renderTasks = (tasks) => {
+    while(notCompletedOrderedList.firstChild){
+        notCompletedOrderedList.removeChild(notCompletedOrderedList.firstChild);
+    }
+    while(completedOrderedList.firstChild){
+        completedOrderedList.removeChild(completedOrderedList.firstChild);
+    }
+
     tasks.forEach((task , index) => {
         let taskList = createList(task.title , task.description , index)
         if(task.mark){
@@ -48,6 +54,7 @@ const deleteTask = (index) => {
 const markDoList = (index) => {
     tasks[index].mark = true
     console.log(tasks[index])
+    console.log(index)
 
 }
 

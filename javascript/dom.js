@@ -42,6 +42,9 @@ const addTask = createHtmlElement("div" , "add-task")
 const title = createInput("text" ,null ,null,"Add a Task" , null)
 const description = createInput("text" , null , null , "Add a description" , null)
 
+
+const completedOrderedList = createHtmlElement("ol" , "completed")
+
 const createList = (taskTitle , taskDescription , index) => {
     const li = createHtmlElement("li" , null , null)
     let title = createHtmlElement("p")
@@ -52,17 +55,32 @@ const createList = (taskTitle , taskDescription , index) => {
     const deleteBtn = createBtn("" , index)
     const editBtn = createBtn("" , index)
     editBtn.addEventListener("click" , ()=> {
-        updateTask(parseInt(editBtn.value) ,title ,description)
+        document.getElementsByTagName("input")[0].value = tasks[editBtn.value].title
+        document.getElementsByTagName("input")[1].value = tasks[editBtn.value].description
+        const udateBtn = createBtn("update")
+        addTask.appendChild(udateBtn)
+        udateBtn.addEventListener("click" , () => {
+            tasks[editBtn.value].title = document.getElementsByTagName("input")[0].value
+            tasks[editBtn.value].description = document.getElementsByTagName("input")[1].value
+            addToLocalStorage(tasks , "tasks")
+            renderTasks(tasks)
+            document.getElementsByTagName("input")[0].value = ""
+            document.getElementsByTagName("input")[1].value = ""
+            udateBtn.remove()
+
+        })
     })
 
     deleteBtn.addEventListener("click" , () => {
         deleteTask(parseInt(deleteBtn.value))
         addToLocalStorage(tasks , "tasks")
-        renderTasks(tasks)
+        deleteBtn.parentElement.remove();
+
     })
     checkBtn.addEventListener("click" , () => {
         markDoList(checkBtn.value)
         addToLocalStorage(tasks , "tasks")
+        renderTasks(tasks)
     })
     const checkIcon = createHtmlElement("i" , "fa fa-check")
     checkBtn.appendChild(checkIcon)
@@ -76,6 +94,8 @@ const createList = (taskTitle , taskDescription , index) => {
 
 }
 
+const completed =  createHtmlElement("h3",null,null,"Completed")
+const completedList = createList()
 
 
 
@@ -83,15 +103,14 @@ const notCompletedOrderedList = createHtmlElement("ol" , "not-completed")
 const notCompleted =  createHtmlElement("h3",null,null,"Not Completed")
 
 const addBtn = createBtn("Add")
-addBtn.addEventListener("click" , () => {
-    appendToArry(createTask(title,description),tasks)
-    addToLocalStorage(tasks , "tasks")
+addBtn.addEventListener("click", () => {
+    let newTask = createTask(title, description);
+    appendToArry(newTask, tasks);
+    addToLocalStorage(tasks, "tasks");
     renderTasks(tasks)
-})
+});
 
-const completedOrderedList = createHtmlElement("ol" , "completed")
-const completed =  createHtmlElement("h3",null,null,"Completed")
-const completedList = createList()
+
 
 
 
